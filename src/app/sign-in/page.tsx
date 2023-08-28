@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { useForm, Resolver } from 'react-hook-form'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Copyright(props: any) {
   return (
     <Typography
@@ -83,7 +84,7 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<FormValues>({ resolver })
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = (data: FormValues): void => {
     console.log(data)
   }
 
