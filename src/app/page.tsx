@@ -1,11 +1,19 @@
+'use client'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function Home() {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push('/sign-in')
+  })
+
   return (
     <main>
-      <p>Hello World</p>
-      <Link href="/sign-in">Aaaaaaaa</Link>
-      <Link href="/sign-up">Aaaaaaaa</Link>
+      <p>Something Went Wrong! Try this link</p>
+      <Link href="/sign-in">Sign-in</Link>
     </main>
   )
 }
