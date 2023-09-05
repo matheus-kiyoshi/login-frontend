@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { useForm, Resolver } from 'react-hook-form'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Copyright(props: any) {
@@ -83,9 +85,24 @@ export default function SignIn() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ resolver })
+  const router = useRouter()
+
+  const handleFetch = async (data: FormValues) => {
+    const apiURL = 'https://login-api-sage.vercel.app/users/login'
+
+    try {
+      const response = await axios.post(apiURL, data)
+      const token = response.data.token
+      localStorage.setItem('token', token)
+      localStorage.setItem('user', response.data.id)
+      router.push(`/user/`)
+    } catch (error) {
+      console.error('Erro ao fazer a requisição:', error)
+    }
+  }
 
   const onSubmit = (data: FormValues): void => {
-    console.log(data)
+    handleFetch(data)
   }
 
   return (
